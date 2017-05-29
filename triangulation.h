@@ -20,7 +20,7 @@ struct Point {
   }
 
   void print() {
-    cout << "(" << x << ", " << y << ")" << endl;
+    cout << "(" << x << ", " << y << ", " << z << ")" << endl;
   }
 };
 
@@ -50,12 +50,17 @@ public:
     lower = Plane();
   }
 
-   void addPoint(float x, float y, float z) {
+  void addPoint(float x, float y, float z) {
     if (z == 1) {
       upper.addPoint(x, y, z);
     } else {
       lower.addPoint(x, y, z);
     }
+  }
+
+  void print() {
+    upper.print();
+    lower.print();
   }
 
 };
