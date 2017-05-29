@@ -44,10 +44,13 @@ struct Plane {
 class Triangulation {
 public:
   Plane upper, lower;
+  int m, n;
 
-  Triangulation() {
+  Triangulation(int m, int n) {
     upper = Plane();
     lower = Plane();
+    this->m = m;
+    this->n = n;
   }
 
   void addPoint(double x, double y, double z) {
@@ -59,19 +62,28 @@ public:
   }
 
   void print() {
+    cout << "m = " << m << "\nn = " << n << endl;
     upper.print();
     lower.print();
 
-    cout << "-------" << endl;
-    Point p1, p2, p3;
-    p1 = upper.allPoints[0];
-    p2 = upper.allPoints[1];
-    p3 = lower.allPoints[0];
-    p1.print();
-    p2.print();
-    p3.print();
-    double area = getArea(p1, p2, p3);
-    cout << area << endl;
+    // cout << "-------" << endl;
+    // Point p1, p2, p3;
+    // p1 = upper.allPoints[0];
+    // p2 = upper.allPoints[1];
+    // p3 = upper.allPoints[2];
+    // p1.print();
+    // p2.print();
+    // p3.print();
+    // double area = getArea(p1, p2, p3);
+    // cout << area << endl;
+  }
+
+  void triangulate() {
+    vector<Point> upperPoints = upper.allPoints;
+    vector<Point> lowerPoints = lower.allPoints;
+    for (int i = 0; i < lowerPoints.size(); i++) {
+
+    }
   }
 
   double getDistance(Point p1, Point p2) {
@@ -85,6 +97,9 @@ public:
     double a = getDistance(p1, p2);
     double b = getDistance(p2, p3);
     double c = getDistance(p1, p3);
+    // cout << "a = " << a << endl;
+    // cout << "b = " << b << endl;
+    // cout << "c = " << c << endl;
     double s = (a + b + c) / 2;
     return sqrt(s * (s - a) * (s - b) * (s - c));
   }

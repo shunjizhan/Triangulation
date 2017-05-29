@@ -10,10 +10,10 @@ int main() {
   int m, n;
   double X, Y, Z;
   string x, y, z;
-  Triangulation t;
 
   cin >> m >> n;
-  cout << m << " " << n << endl;
+  // cout << m << " " << n << endl;
+  Triangulation t(m, n);
 
   for (int i = 0; i < m; i++) {
     cin >> x >> y >> z;
@@ -21,7 +21,7 @@ int main() {
     Y = atof(y.c_str());
     Z = atof(z.c_str());
 
-    cout << X << " " << Y << " " << Z << endl;
+    // cout << X << " " << Y << " " << Z << endl;
     t.addPoint(X, Y, Z);
   }
 
@@ -31,7 +31,7 @@ int main() {
     Y = atof(y.c_str());
     Z = atof(z.c_str());
 
-    cout << X << " " << Y << " " << Z << endl;
+    // cout << X << " " << Y << " " << Z << endl;
     t.addPoint(X, Y, Z);
   }
 
