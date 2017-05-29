@@ -3,12 +3,12 @@ CXX=clang++
 
 all:
 	$(MAKE) clean
-	$(MAKE) run
+	$(MAKE) test1
 
 run: Main.o
 	${CXX} Main.o -o triangulation
 
-test: Main.o
+test1: Main.o
 	${CXX} Main.o -o triangulation
 	./triangulation < Input/001_boxPoints.txt
 
