@@ -8,26 +8,28 @@ using namespace std;
 
 int main() {
   int m, n;
-  double intX, intY;
-  string x, y, t;
+  double X, Y, Z;
+  string x, y, z;
 
   cin >> m >> n;
   cout << m << " " << n << endl;
 
   for (int i = 0; i < m; i++) {
-    cin >> x >> y >> t;
-    intX = atof(x.c_str());
-    intY = atof(y.c_str());
+    cin >> x >> y >> z;
+    X = atof(x.c_str());
+    Y = atof(y.c_str());
+    Z = atof(z.c_str());
 
-    cout << intX << " " << intY << endl;
+    cout << X << " " << Y << " " << Z << endl;
   }
 
   for (int j = 0; j < n; j++) {
-    cin >> x >> y >> t;
-    intX = atof(x.c_str());
-    intY = atof(y.c_str());
+    cin >> x >> y >> z;
+    X = atof(x.c_str());
+    Y = atof(y.c_str());
+    Z = atof(z.c_str());
 
-    cout << intX << " " << intY << endl;
+    cout << X << " " << Y << " " << Z << endl;
   }
 
   return 0;
