@@ -10,7 +10,7 @@ run: Main.o
 
 test1: Main.o
 	${CXX} Main.o -o triangulation
-	./triangulation < Input/001_boxPoints.txt
+	./triangulation < Input/001_boxPoints.txt > out
 
 clean:
 	/bin/rm -f *.o triangulation

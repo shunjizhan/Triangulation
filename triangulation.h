@@ -162,12 +162,12 @@ public:
     i = m;
     j = n;
     while(!(i == 0 && j == 0)) {
-      cout << i << " " << j << " ";
+      cout << i + 1 << " " << j + m << " ";
       ToroidalDot current = toroidal[i][j];
       ToroidalDot left = toroidal[i - 1][j];
       if (i == 0) {
         j = j - 1;
-        cout << j + 1 + m<< endl;
+        cout << j + m<< endl;
       } else if (j == 0) {
         i = i - 1;
         cout << i + 1<< endl;
@@ -177,7 +177,7 @@ public:
           cout << i + 1<< endl;
         } else {
           j = j - 1;
-          cout << j + 1 + m << endl;
+          cout << j + m << endl;
         }
       }
     }
