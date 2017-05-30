@@ -149,23 +149,45 @@ public:
             left = toroidal[x][k - x - 1];
             fromTop = top.minDistance + top.down;
             fromLeft = left.minDistance + left.right;
-            if (fromTop < fromLeft) {
+            if (fromTop < fromLeft) {       // left has priority
               toroidal[x][k - x].minDistance = fromTop;
             } else {
               toroidal[x][k - x].minDistance = fromLeft;
             }
           }
-
-
         }
       }
     }
 
-    for (int i = 0; i <= m; i++) {
-      for (int j = 0; j <= n; j++) {
-        toroidal[i][j].print();
+    i = m;
+    j = n;
+    while(!(i == 0 && j == 0)) {
+      cout << i << " " << j << " ";
+      ToroidalDot current = toroidal[i][j];
+      ToroidalDot left = toroidal[i - 1][j];
+      if (i == 0) {
+        j = j - 1;
+        cout << j + 1 + m<< endl;
+      } else if (j == 0) {
+        i = i - 1;
+        cout << i + 1<< endl;
+      } else {
+        if (left.minDistance + left.right == current.minDistance){
+          i = i - 1;
+          cout << i + 1<< endl;
+        } else {
+          j = j - 1;
+          cout << j + 1 + m << endl;
+        }
       }
     }
+
+
+    // for (int i = 0; i <= m; i++) {
+    //   for (int j = 0; j <= n; j++) {
+    //     toroidal[i][j].print();
+    //   }
+    // }
 
   }
 
