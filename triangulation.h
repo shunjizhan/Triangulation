@@ -27,8 +27,7 @@ struct Point {
 struct Plane {
   vector<Point> allPoints;
 
-  Plane() {
-  }
+  Plane() {}
 
   void addPoint(double x, double y, double z) {
     allPoints.push_back(Point(x, y, z));
@@ -41,16 +40,36 @@ struct Plane {
   }
 };
 
+struct ToroidalDot {
+  double right, down, minDistance;
+
+  ToroidalDot() {
+    right = -1;
+    down = -1;
+    minDistance = -1;
+  }
+
+  ToroidalDot(double r, double d) {
+    right = r;
+    down = d;
+    minDistance = -1;
+  }
+
+  void print() {
+    cout << "right = " << right << ", down = " << down << ", minDistance = " << minDistance << endl;
+  }
+};
+
 class Triangulation {
 public:
-  Plane upper, lower;
   int m, n;
+  Plane upper, lower;
 
   Triangulation(int m, int n) {
-    upper = Plane();
-    lower = Plane();
     this->m = m;
     this->n = n;
+    upper = Plane();
+    lower = Plane();
   }
 
   void addPoint(double x, double y, double z) {
@@ -62,9 +81,9 @@ public:
   }
 
   void print() {
-    cout << "m = " << m << "\nn = " << n << endl;
-    upper.print();
-    lower.print();
+    // cout << "m = " << m << "\nn = " << n << endl;
+    // upper.print();
+    // lower.print();
 
     // cout << "-------" << endl;
     // Point p1, p2, p3;
@@ -81,9 +100,73 @@ public:
   void triangulate() {
     vector<Point> upperPoints = upper.allPoints;
     vector<Point> lowerPoints = lower.allPoints;
-    for (int i = 0; i < lowerPoints.size(); i++) {
+    upperPoints.push_back(upperPoints[0]);
+    lowerPoints.push_back(lowerPoints[0]);
 
+    // cout << upperPoints.size() << " " << lowerPoints.size() << endl;
+
+    ToroidalDot toroidal[m + 1][n + 1];
+    for (int i = 0; i <= m; i++) {
+      for (int j = 0; j <= n; j++) {
+        double right = getArea(upperPoints[i], lowerPoints[j], lowerPoints[j + 1]);
+        double down = getArea(upperPoints[i], lowerPoints[j], upperPoints[i + 1]);
+        // cout << right << " " << down << endl;
+        toroidal[i][j] = ToroidalDot(right, down);
+      }
     }
+
+    for (int i = 0; i <= m ; i++) {
+      toroidal[i][n].right = -1;
+    }
+
+    for (int j = 0; j <= m ; j++) {
+      toroidal[m][j].down = -1;
+    }
+
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    toroidal[0][0].minDistance = 0;
+    while(i <= m * 2 || j <= n * 2) {
+      k++;
+      i++;
+      j++;
+      for (int x = 0; x <= k; x++) {
+        if (x <= m && (k - x) <= n) {       // dot in toroidal
+          ToroidalDot left, top;
+          double fromLeft, fromTop;
+
+          if (x == 0) {                     // leftmost colume
+            left = toroidal[x][k - x - 1];
+            fromLeft = left.minDistance + left.right;
+            toroidal[x][k - x].minDistance = fromLeft;
+          } else if ((k - x) == 0) {        // top row
+            left = toroidal[x - 1][k - x];
+            fromTop = top.minDistance + top.down;
+            toroidal[x][k - x].minDistance = fromLeft;
+          } else {                          // other dots
+            top = toroidal[x - 1][k - x];
+            left = toroidal[x][k - x - 1];
+            fromTop = top.minDistance + top.down;
+            fromLeft = left.minDistance + left.right;
+            if (fromTop < fromLeft) {
+              toroidal[x][k - x].minDistance = fromTop;
+            } else {
+              toroidal[x][k - x].minDistance = fromLeft;
+            }
+          }
+
+
+        }
+      }
+    }
+
+    for (int i = 0; i <= m; i++) {
+      for (int j = 0; j <= n; j++) {
+        toroidal[i][j].print();
+      }
+    }
+
   }
 
   double getDistance(Point p1, Point p2) {

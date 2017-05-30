@@ -35,7 +35,7 @@ int main() {
     t.addPoint(X, Y, Z);
   }
 
-  t.print();
+  t.triangulate();
 
   return 0;
 }
