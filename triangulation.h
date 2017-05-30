@@ -162,22 +162,23 @@ public:
     i = m;
     j = n;
     while(!(i == 0 && j == 0)) {
-      cout << (i % m) + 1 << " " << ((j + 1) % n) + m << " ";
-      ToroidalDot current = toroidal[i][j];
-      ToroidalDot left = toroidal[i - 1][j];
+      cout << (i % m) + 1 << " " << (j % n) + m << " ";
       if (i == 0) {
-        j = j - 1;
-        cout << ((j + 1) % n) + m << endl;
+        j--;
+        cout << (j % n) + m << endl;
       } else if (j == 0) {
-        i = i - 1;
+        i--;
         cout << (i % m) + 1<< endl;
       } else {
-        if (left.minDistance + left.right == current.minDistance){
-          i = i - 1;
+        ToroidalDot current = toroidal[i][j];
+        ToroidalDot left = toroidal[i][j - 1];
+        ToroidalDot top = toroidal[i - 1][j];
+        if (abs(left.minDistance + left.right - current.minDistance) < abs(top.minDistance + top.down - current.minDistance)) {
+          j--;
           cout << (i % m) + 1<< endl;
         } else {
-          j = j - 1;
-          cout << ((j + 1) % n) + m << endl;
+          i--;
+          cout << (j % n) + m << endl;
         }
       }
     }

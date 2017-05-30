@@ -1,5 +1,5 @@
 % visualization script
-pointsFileName = './Input/001_boxPoints.txt';
+pointsFileName = './Input/004_ellipseHD.txt';
 triangleFileName = './triangle.txt';
 
 % Read points
