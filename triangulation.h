@@ -162,10 +162,10 @@ public:
     i = m;
     j = n;
     while(!(i == 0 && j == 0)) {
-      cout << (i % m) + 1 << " " << (j % n) + m << " ";
+      cout << (i % m) + 1 << " " << (j % n) + m + 1<< " ";
       if (i == 0) {
         j--;
-        cout << (j % n) + m << endl;
+        cout << (j % n) + m + 1 << endl;
       } else if (j == 0) {
         i--;
         cout << (i % m) + 1<< endl;
@@ -175,7 +175,7 @@ public:
         ToroidalDot top = toroidal[i - 1][j];
         if (abs(left.minDistance + left.right - current.minDistance) < abs(top.minDistance + top.down - current.minDistance)) {
           j--;
-          cout << (j % n) + m << endl;
+          cout << (j % n) + m + 1 << endl;
         } else {
           i--;
           cout << (i % m) + 1 << endl;
