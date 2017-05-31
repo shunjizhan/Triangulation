@@ -175,10 +175,10 @@ public:
         ToroidalDot top = toroidal[i - 1][j];
         if (abs(left.minDistance + left.right - current.minDistance) < abs(top.minDistance + top.down - current.minDistance)) {
           j--;
-          cout << (i % m) + 1<< endl;
+          cout << (j % n) + m << endl;
         } else {
           i--;
-          cout << (j % n) + m << endl;
+          cout << (i % m) + 1 << endl;
         }
       }
     }
